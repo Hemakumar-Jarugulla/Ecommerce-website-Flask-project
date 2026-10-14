@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Cart Address - E-Shop{% endblock %}
+
+{% block content %}
+
+<h1>Select Delivery Address</h1>
+
+{% if addresses %}
+
+<form method="POST">
+
+    {% for address in addresses %}
+
+    <div class="address-card">
+
+        <input type="radio" name="address_id" value="{{ address['id'] }}" required>
+
+        <strong>{{ address['full_name'] }}</strong>
+
+        <p>{{ address['phone'] }}</p>
+
+        <p>{{ address['address'] }}</p>
+
+        <p>{{ address['city'] }}, {{ address['state'] }}</p>
+
+        <p>{{ address['pincode'] }}</p>
+
+    </div>
+
+    {% endfor %}
+
+    <button type="submit">Use Selected Address</button>
+
+</form>
+
+{% endif %}
+
+<h2>Add New Address</h2>
+
+<form method="POST">
+
+    <label>Full Name</label>
+    <input type="text" name="full_name" required>
+
+    <label>Phone</label>
+    <input type="text" name="phone" required>
+
+    <label>Address</label>
+    <textarea name="address" required></textarea>
+
+    <label>City</label>
+    <input type="text" name="city" required>
+
+    <label>State</label>
+    <input type="text" name="state" required>
+
+    <label>Pincode</label>
+    <input type="text" name="pincode" required>
+
+    <button type="submit">Add Address</button>
+
+</form>
+
+{% endblock %}

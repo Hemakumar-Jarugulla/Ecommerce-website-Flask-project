@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Track Order - E-Shop{% endblock %}
+
+{% block content %}
+
+<h1>Track Order #{{ order['id'] }}</h1>
+
+<h2>Order Status</h2>
+
+<p>Current Status: {{ order['status'] }}</p>
+
+<p>Order Amount: ₹{{ order['total_amount'] }}</p>
+
+<h2>Delivery Address</h2>
+
+<p>{{ order['full_name'] }}</p>
+
+<p>{{ order['phone'] }}</p>
+
+<p>{{ order['address'] }}</p>
+
+<p>{{ order['city'] }}, {{ order['state'] }}</p>
+
+<p>{{ order['pincode'] }}</p>
+
+<h2>Products</h2>
+
+{% for item in items %}
+
+<div class="order-item">
+
+    <img src="{{ url_for('static', filename='css/images/' + item['image']) }}" alt="{{ item['name'] }}">
+
+    <p>{{ item['name'] }}</p>
+
+    <p>Quantity: {{ item['quantity'] }}</p>
+
+    <p>Price: ₹{{ item['price'] }}</p>
+
+</div>
+
+{% endfor %}
+
+<h2>Order Progress</h2>
+
+<p>Order Placed</p>
+<p>Order Confirmed</p>
+<p>Shipped</p>
+<p>Out for Delivery</p>
+<p>Delivered</p>
+
+<a href="{{ url_for('myorders') }}">Back to My Orders</a>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Order Summary - E-Shop{% endblock %}
+
+{% block content %}
+
+<h1>Order Summary</h1>
+
+<h2>Product Details</h2>
+
+<p>Product: {{ product['name'] }}</p>
+
+<p>Price: ₹{{ product['price'] }}</p>
+
+<p>Quantity: {{ quantity }}</p>
+
+<p>Total: ₹{{ total_amount }}</p>
+
+<h2>Delivery Address</h2>
+
+<p>{{ address['full_name'] }}</p>
+
+<p>{{ address['phone'] }}</p>
+
+<p>{{ address['address'] }}</p>
+
+<p>{{ address['city'] }}, {{ address['state'] }}</p>
+
+<p>{{ address['pincode'] }}</p>
+
+<a href="{{ url_for('payment', product_id=product_id) }}">
+    Continue to Payment
+</a>
+
+{% endblock %}

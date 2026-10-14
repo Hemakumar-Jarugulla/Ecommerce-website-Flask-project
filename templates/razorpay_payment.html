@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Razorpay Payment - E-Shop{% endblock %}
+
+{% block content %}
+
+<h1>Complete Payment</h1>
+
+<p>Product: {{ product['name'] }}</p>
+
+<p>Quantity: {{ quantity }}</p>
+
+<p>Payment Method: {{ payment_method }}</p>
+
+<p>Amount: ₹{{ total_amount }}</p>
+
+<button id="pay-button">Pay Now</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+var options = {
+    "key": "{{ razorpay_key }}",
+    "amount": "{{ amount }}",
+    "currency": "INR",
+    "name": "E-Shop",
+    "description": "E-Shop Order Payment",
+    "order_id": "{{ razorpay_order_id }}",
+
+    "handler": function(response) {
+
+        var form = document.createElement("form");
+
+        form.method = "POST";
+
+        form.action = "{{ url_for('payment_success', order_id=order_id) }}";
+
+        var paymentId = document.createElement("input");
+        paymentId.type = "hidden";
+        paymentId.name = "razorpay_payment_id";
+        paymentId.value = response.razorpay_payment_id;
+
+        var orderId = document.createElement("input");
+        orderId.type = "hidden";
+        orderId.name = "razorpay_order_id";
+        orderId.value = response.razorpay_order_id;
+
+        var signature = document.createElement("input");
+        signature.type = "hidden";
+        signature.name = "razorpay_signature";
+        signature.value = response.razorpay_signature;
+
+        form.appendChild(paymentId);
+        form.appendChild(orderId);
+        form.appendChild(signature);
+
+        document.body.appendChild(form);
+
+        form.submit();
+    }
+};
+
+var razorpay = new Razorpay(options);
+
+document.getElementById("pay-button").onclick = function() {
+    razorpay.open();
+};
+
+</script>
+
+{% endblock %}

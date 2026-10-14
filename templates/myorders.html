@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}My Orders - E-Shop{% endblock %}
+
+{% block content %}
+
+<h1>My Orders</h1>
+
+{% for order in orders %}
+
+<div class="order-card">
+
+    <h2>Order #{{ order['id'] }}</h2>
+
+    <img src="{{ url_for('static', filename='css/images/' + order['image']) }}" alt="{{ order['name'] }}">
+
+    <p>Product: {{ order['name'] }}</p>
+
+    <p>Quantity: {{ order['quantity'] }}</p>
+
+    <p>Price: ₹{{ order['price'] }}</p>
+
+    <p>Total: ₹{{ order['total_amount'] }}</p>
+
+    <p>Status: {{ order['status'] }}</p>
+
+    <p>Order Date: {{ order['created_at'] }}</p>
+
+    <a href="{{ url_for('track', order_id=order['id']) }}">
+        Track Order
+    </a>
+
+</div>
+
+{% else %}
+
+<p>You have no orders.</p>
+
+{% endfor %}
+
+{% endblock %}

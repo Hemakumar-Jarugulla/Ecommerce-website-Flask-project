@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Cart Order Summary - E-Shop{% endblock %}
+
+{% block content %}
+
+<h1>Cart Order Summary</h1>
+
+<h2>Products</h2>
+
+{% for item in cart_items %}
+
+<div class="cart-summary-item">
+
+    <p>Product: {{ item['name'] }}</p>
+
+    <p>Price: ₹{{ item['price'] }}</p>
+
+    <p>Quantity: {{ item['quantity'] }}</p>
+
+    <p>Subtotal: ₹{{ item['price'] * item['quantity'] }}</p>
+
+</div>
+
+{% endfor %}
+
+<h2>Total: ₹{{ total_amount }}</h2>
+
+<h2>Delivery Address</h2>
+
+<p>{{ address['full_name'] }}</p>
+
+<p>{{ address['phone'] }}</p>
+
+<p>{{ address['address'] }}</p>
+
+<p>{{ address['city'] }}, {{ address['state'] }}</p>
+
+<p>{{ address['pincode'] }}</p>
+
+<p>Cart payment/order creation can be connected to the same COD and Razorpay flow.</p>
+
+<a href="{{ url_for('cart') }}">Back to Cart</a>
+
+{% endblock %}

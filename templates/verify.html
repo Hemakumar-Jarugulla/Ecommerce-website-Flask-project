@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}OTP Verification - E-Shop{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h1>OTP Verification</h1>
+
+    {% if info %}
+        <p class="error">{{ info }}</p>
+    {% endif %}
+
+    <form method="POST">
+
+        <label>Enter OTP</label>
+
+        <input type="text" name="otp" maxlength="6" required>
+
+        <button type="submit">Verify OTP</button>
+
+    </form>
+
+</div>
+
+{% endblock %}

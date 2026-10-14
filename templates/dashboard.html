@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - E-Shop{% endblock %}
+
+{% block content %}
+
+<h1>Products</h1>
+
+<div class="product-grid">
+
+    {% for product in products %}
+
+    <div class="product-card">
+
+        <div class="product-image-container">
+
+            <img src="{{ url_for('static', filename='css/images/' + product['image']) }}" alt="{{ product['name'] }}">
+
+            <a href="{{ url_for('addtofav', product_id=product['id']) }}" class="heart-button">
+
+                {% if product['is_favorite'] %}
+                    <span class="heart red-heart">♥</span>
+                {% else %}
+                    <span class="heart white-heart">♡</span>
+                {% endif %}
+
+            </a>
+
+        </div>
+
+        <h2>{{ product['name'] }}</h2>
+
+        <p>{{ product['category'] }}</p>
+
+        <p>{{ product['description'] }}</p>
+
+        <p>Rating: {{ product['rating'] }}</p>
+
+        <h3>₹{{ product['price'] }}</h3>
+
+        <p>Stock: {{ product['stock'] }}</p>
+
+        <a href="{{ url_for('productdetails', product_id=product['id']) }}">
+            View Product
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Completed - E-Shop{% endblock %}
+
+{% block content %}
+
+<h1>Order Confirmed</h1>
+
+<p>Your order has been successfully placed.</p>
+
+<p>Order ID: {{ order['id'] }}</p>
+
+<p>Product: {{ item['name'] }}</p>
+
+<p>Quantity: {{ item['quantity'] }}</p>
+
+<p>Amount: ₹{{ order['total_amount'] }}</p>
+
+<p>Payment Method: {{ order['payment_method'] }}</p>
+
+<p>Payment Status: {{ order['payment_status'] }}</p>
+
+<a href="{{ url_for('myorders') }}">My Orders</a>
+
+<a href="{{ url_for('dashboard') }}">Continue Shopping</a>
+
+{% endblock %}
